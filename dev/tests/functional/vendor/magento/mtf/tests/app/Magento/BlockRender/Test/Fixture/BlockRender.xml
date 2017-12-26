@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../etc/fixture.xsd">
+    <fixture name="blockRender"
+             module="Magento_BlockRender"
+             type="blank"
+             entity_type="test_fixture"
+             repository_class="Magento\BlockRender\Test\Repository\BlockRender"
+             handler_interface="Magento\BlockRender\Test\Handler\BlockRender\BlockRenderInterface"
+             class="Magento\BlockRender\Test\Fixture\BlockRender"
+             >
+        <field name="locator" is_required="1">
+            <default_value xsi:type="string">body</default_value>
+        </field>
+    </fixture>
+</config>
