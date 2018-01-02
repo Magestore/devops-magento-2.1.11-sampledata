@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 -->
@@ -33,6 +33,7 @@
         <env name="testsuite_rule_path" value="Magento/Mtf/TestSuite/MtfTests" />
         <env name="log_directory" value="var/log" />
         <env name="events_preset" value="base" />
+        <env name="rerun_count" value="0" />
     </php>
 
 </phpunit>

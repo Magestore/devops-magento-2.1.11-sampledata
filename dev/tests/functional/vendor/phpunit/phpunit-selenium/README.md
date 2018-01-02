@@ -1,3 +1,5 @@
+PHPUnit-Selenium [![Build Status](https://travis-ci.org/giorgiosironi/phpunit-selenium.svg?branch=master)](https://travis-ci.org/giorgiosironi/phpunit-selenium)
+
 This package contains a Selenium2TestCase class that can be used to run end-to-end tests against Selenium 2.
 
 Installing
@@ -10,7 +12,7 @@ Requirements
 
 - PHPUnit 4.8, 5.x
 
-The current mainline of this package is 3.x, which supports PHPUnit 5.x.
+The current mainline of this package is 3.x, which supports PHPUnit 5.x. This version is only compatible with PHP 5.6 and PHP 7.
 
 The second supported line is 2.x, which supports PHPUnit >= 4.8 instead.
 
@@ -33,6 +35,4 @@ Just run the following Vagrant commands (a minimal version of `v1.7` is required
 
     cd /vagrant
     vendor/bin/phpunit Tests
- 
-and you must see the `phpunit` testing `phpunit-selenium` project.
 

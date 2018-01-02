@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -11,7 +11,7 @@ use Magento\BlockRender\Test\Page\Area\TestPage;
 use Magento\Mtf\Test\Fixture\Test;
 
 /**
- * Class PageOpenSuccess
+ * Fake assertion, just to test constraint functionality.
  */
 class PageOpenSuccess extends AbstractConstraint
 {

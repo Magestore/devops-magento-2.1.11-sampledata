@@ -91,12 +91,13 @@
  * @method array log(string $type) Get the log for a given log type. Log buffer is reset after each request.
  * @method array logTypes() Get available log types.
  * @method void closeWindow() Close the current window.
- * @method void close() Close the current window and clear session data.
+ * @method void stop() Close the current window and clear session data.
  * @method \PHPUnit_Extensions_Selenium2TestCase_Element active() Get the element on the page that currently has focus.
+ * @method \PHPUnit_Extensions_Selenium2TestCase_Window currentWindow() get the current Window Object
  */
 abstract class PHPUnit_Extensions_Selenium2TestCase extends PHPUnit_Framework_TestCase
 {
-    const VERSION = '2.0.1';
+    const VERSION = '3.0.3';
 
     /**
      * @var string  override to provide code coverage data from the server
@@ -122,6 +123,20 @@ abstract class PHPUnit_Extensions_Selenium2TestCase extends PHPUnit_Framework_Te
      * @var PHPUnit_Extensions_Selenium2TestCase_SessionStrategy
      */
     protected static $browserSessionStrategy;
+
+    /**
+     * Default timeout for wait until, ms
+     *
+     * @var int
+     */
+    private static $defaultWaitUntilTimeout = 0;
+
+    /**
+     * Default timeout for wait until, ms
+     *
+     * @var int
+     */
+    private static $defaultWaitUntilSleepInterval = 500;
 
     /**
      * @var PHPUnit_Extensions_Selenium2TestCase_SessionStrategy
@@ -175,6 +190,41 @@ abstract class PHPUnit_Extensions_Selenium2TestCase extends PHPUnit_Framework_Te
     {
         return new PHPUnit_Extensions_Selenium2TestCase_SessionStrategy_Isolated;
     }
+
+    /**
+     * Get the default timeout for WaitUntil
+     * @return int the default timeout
+     */
+    public static function defaultWaitUntilTimeout(){
+        return self::$defaultWaitUntilTimeout;
+    }
+
+    /**
+     * Set the default timeout for WaitUntil
+     * @param int $timeout the new default timeout
+     */
+    public static function setDefaultWaitUntilTimeout($timeout){
+        $timeout = (int) $timeout;
+        self::$defaultWaitUntilTimeout = $timeout > 0 ? $timeout : 0;
+    }
+
+    /**
+     * Get the default sleep delay for WaitUntil
+     * @return int
+     */
+    public static function defaultWaitUntilSleepInterval(){
+        return self::$defaultWaitUntilSleepInterval;
+    }
+
+    /**
+     * Set default sleep delay for WaitUntil
+     * @param int $sleepDelay the new default sleep delay
+     */
+    public static function setDefaultWaitUntilSleepInterval($sleepDelay){
+        $sleepDelay = (int) $sleepDelay;
+        self::$defaultWaitUntilSleepInterval = $sleepDelay > 0 ? $sleepDelay : 0;
+    }
+
 
     public function __construct($name = NULL, array $data = array(), $dataName = '')
     {
@@ -321,7 +371,7 @@ abstract class PHPUnit_Extensions_Selenium2TestCase extends PHPUnit_Framework_Te
         return PHPUnit_Extensions_SeleniumTestSuite::fromTestCaseClass($className);
     }
 
-    public function onNotSuccessfulTest(Exception $e)
+    public function onNotSuccessfulTest($e)
     {
         $this->getStrategy()->notSuccessfulTest();
         parent::onNotSuccessfulTest($e);
@@ -506,5 +556,18 @@ abstract class PHPUnit_Extensions_Selenium2TestCase extends PHPUnit_Framework_Te
     public function setUpPage()
     {
 
+    }
+
+    /**
+     * Check whether an alert box is present
+     */
+    public function alertIsPresent()
+    {
+        try {
+            $this->alertText();
+            return TRUE;
+        } catch (Exception $e) {
+            return NULL;
+        }
     }
 }

@@ -3,10 +3,32 @@ PHPUnit_Selenium
 
 This is the list of changes made to PHPUnit_Selenium.
 
+PHPUnit_Selenium 3.0.3
+----------------------
+
+* Added rect() command
+* Revamp of testing VM using Java 8, PHP 5.6
+
+PHPUnit_Selenium 3.0.2
+----------------------
+
+* Bug fix of waitUntil()
+
+PHPUnit_Selenium 3.0.1
+----------------------
+
+* Configurability of waitUntil() timeout and sleep interval
+
+PHPUnit_Selenium 3.0.0
+----------------------
+
+* Only supports PHPUnit 5
+* Officially supports PHP 7
+
 PHPUnit_Selenium 2.0.1
 ----------------------
 
-* Supporting only PHPUnit 4.x
+* Only supports PHPUnit 4
 
 PHPUnit_Selenium 2.0.0
 ----------------------

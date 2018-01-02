@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -42,6 +42,13 @@ interface ElementInterface
      * @return bool
      */
     public function isVisible();
+
+    /**
+     * Check whether element is present in the DOM.
+     *
+     * @return bool
+     */
+    public function isPresent();
 
     /**
      * Check whether element is enabled

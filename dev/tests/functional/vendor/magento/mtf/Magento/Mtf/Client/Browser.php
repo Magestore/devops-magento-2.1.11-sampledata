@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -122,6 +122,17 @@ final class Browser implements BrowserInterface
     public function switchToFrame(Locator $locator = null)
     {
         $this->driver->switchToFrame($locator);
+    }
+
+    /**
+     * Open new tab/window in Browser and switch to it.
+     *
+     * @return void
+     */
+    public function openNewWindow()
+    {
+        $this->driver->openWindow();
+        $this->selectWindow();
     }
 
     /**

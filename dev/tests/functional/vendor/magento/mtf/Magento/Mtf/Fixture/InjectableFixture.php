@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -164,7 +164,7 @@ class InjectableFixture implements FixtureInterface
                 $value = $this->skipEmptyValue($value);
             }
 
-            if (null !== $value) {
+            if (null === $data[$name] || null !== $value) {
                 $this->data[$name] = $value;
             }
         }

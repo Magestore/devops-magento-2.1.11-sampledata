@@ -1,4 +1,43 @@
-* Added an ability scroll to left if element is overlapped by another element
+1.0.0-rc.56
+===========
+* Added an ability to rerun failed Variation
+
+1.0.0-rc.55
+===========
+* Fixed issue with triggerChangeEvent() in Selenium Driver
+
+1.0.0-rc.54
+===========
+* Added support for PHP 7.1.x
+
+1.0.0-rc.53
+===========
+* Default value is applied for events preset configuration
+* Added an ability to run CLI commands
+
+1.0.0-rc.52
+===========
+* Copyright year update
+* Added possibility to send any variables from phpunit to the tests in parallel run
+
+1.0.0-rc.51
+===========
+* Fixed an issue with xsi:type null in merging of variation and building of repository
+
+1.0.0-rc.50
+===========
+* Added an ability to open new tab/window
+* Ignore PEER verification for curl transfer
+
+1.0.0-rc.49
+===========
+* Added isPresent method to the ElementInterface
+* Fixed issue with using not existing in PHP 5.6 interface for wrapping exception
+* Add change trigger event to keys method for selenium driver
+
+1.0.0-rc.48
+===========
+* Updated dependencies to use the latest PHPUnit version
 
 1.0.0-rc.47
 ===========

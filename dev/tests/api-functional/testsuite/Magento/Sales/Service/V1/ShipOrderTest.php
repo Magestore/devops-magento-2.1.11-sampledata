@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento\Sales\Service\V1;
@@ -82,7 +82,6 @@ class ShipOrderTest extends \Magento\TestFramework\TestCase\WebapiAbstract
             (int)$orderedQty,
             'Failed asserting that quantity of ordered and shipped items is equal'
         );
-
         $this->assertEquals(
             $productsQuantity,
             count($shipment->getItems()),

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -53,6 +53,13 @@ class Driver implements DriverInterface
      * @var PageLoaderInterface
      */
     protected $pageLoader;
+
+    /**
+     * Event manager instance.
+     *
+     * @var EventManagerInterface
+     */
+    protected $eventManager;
 
     /**
      * @constructor
@@ -317,8 +324,7 @@ class Driver implements DriverInterface
     private function prepareJSForScrollToUpByElement($elementSelector, $parentDepth, $blockedElementSelector)
     {
         return "var element = document.querySelector('$elementSelector'),
-                    height = 100,
-                    width = 0;
+                    height = 100;
 
                 // If element is founded
                 if (element !== null) {
@@ -330,26 +336,15 @@ class Driver implements DriverInterface
                          }
                     }
                     // If element is 'body', then need scroll and throw exception
-                    var bodyElement = document.querySelector('body');
-                    if (element === bodyElement) {
+                    if (element === document.querySelector('body')) {
                          return false;
                     }
 
-                    var elementHeight = element.offsetHeight,
-                        elementWidth = element.offsetWidth;
-                        
-                    height = (elementHeight !== null) ? elementHeight : height;
-                    if (window.innerHeight / 2 < height) {
-                        height = 0;
-                    }
-                    
-                    width = (elementWidth !== null) ? elementWidth : width;
-                    if (window.innerWidth / 2 < width) {
-                        width = 0;
-                    }
+                    var elementHeight = element.offsetHeight;
+                    height = (elementHeight !== null) ? elementHeight : height
                 }
 
-                scrollBy(-width, -height);
+                scrollBy(0, -height);
 
                 return true;";
     }
@@ -380,6 +375,26 @@ class Driver implements DriverInterface
 
         $this->driver->moveto($this->getNativeElement($element));
         $this->driver->click(\PHPUnit_Extensions_Selenium2TestCase_SessionCommand_Click::RIGHT);
+    }
+
+    /**
+     * Check whether element is present in the DOM.
+     *
+     * @param ElementInterface $element
+     * @return bool
+     */
+    public function isPresent(ElementInterface $element)
+    {
+        $isPresent = true;
+        $nativeElement = null;
+        try {
+            $this->eventManager->dispatchEvent(['is_present'], [__METHOD__, $element->getAbsoluteSelector()]);
+            $nativeElement = $this->getNativeElement($element, false);
+        } catch (\PHPUnit_Extensions_Selenium2TestCase_WebDriverException $e) {
+            $isPresent = false;
+        }
+
+        return $nativeElement !== null && $isPresent;
     }
 
     /**
@@ -439,7 +454,7 @@ class Driver implements DriverInterface
         $this->focus($element);
 
         $wrappedElement->value($value);
-        $this->triggerChangeEvent($element);
+        $this->triggerChangeEvent($wrappedElement->attribute('id'));
     }
 
     /**
@@ -554,6 +569,7 @@ class Driver implements DriverInterface
         foreach ($keys as $key) {
             $this->driver->keys($key);
         }
+        $this->triggerChangeEvent($wrappedElement->attribute('id'));
     }
 
     /**
@@ -769,6 +785,16 @@ class Driver implements DriverInterface
     }
 
     /**
+     * Open new tab/window in Browser.
+     *
+     * @return void
+     */
+    public function openWindow()
+    {
+        $this->driver->execute(['script' => 'window.open()', 'args' => []]);
+    }
+
+    /**
      * Close the current window or specified one.
      *
      * @param string|null $handle [optional]
@@ -955,12 +981,11 @@ class Driver implements DriverInterface
     /**
      * Trigger change on event.
      *
-     * @param ElementInterface $element
+     * @param string $elementId
      * @return void
      */
-    protected function triggerChangeEvent(ElementInterface $element)
+    protected function triggerChangeEvent($elementId)
     {
-        $elementId = $element->getAttribute('id');
         if ($elementId) {
             $js = "if (window.jQuery != undefined)";
             $js .= "{jQuery('[id=\"$elementId\"]').change(); jQuery('[id=\"$elementId\"]').keyup();}";

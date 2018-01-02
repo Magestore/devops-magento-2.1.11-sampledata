@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -34,6 +34,14 @@ interface DriverInterface
      * @return void
      */
     public function rightClick(ElementInterface $element);
+
+    /**
+     * Check whether element is present in the DOM.
+     *
+     * @param ElementInterface $element
+     * @return bool
+     */
+    public function isPresent(ElementInterface $element);
 
     /**
      * Check whether element is visible
@@ -195,6 +203,13 @@ interface DriverInterface
      * @return void
      */
     public function switchToFrame(Locator $locator);
+
+    /**
+     * Open new tab in Browser.
+     *
+     * @return void
+     */
+    public function openWindow();
 
     /**
      * Close the current window or specified one.

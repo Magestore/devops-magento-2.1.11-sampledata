@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -58,6 +58,13 @@ interface BrowserInterface
      * @return void
      */
     public function switchToFrame(Locator $locator = null);
+
+    /**
+     * Open new tab/window in Browser and switch to it.
+     *
+     * @return void
+     */
+    public function openNewWindow();
 
     /**
      * Close the current window or specified one.

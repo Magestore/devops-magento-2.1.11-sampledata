@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 namespace Magento\Mtf\System\Event;
@@ -64,7 +64,7 @@ class EventManager implements EventManagerInterface
             ? $_ENV['events_preset']
             : 'default';
 
-        $this->map = $configuration->get('preset/' . $presetName . '/observer');
+        $this->map = $configuration->get('preset/' . $presetName . '/observer', []);
     }
 
     /**

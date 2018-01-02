@@ -1,21 +1,26 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
 namespace Magento\Tag\Test\Handler\Tag;
 
-use Magento\Tag\Test\Handler\Tag\TagInterface;
 use Magento\Mtf\Fixture\FixtureInterface;
 use Magento\Mtf\Handler\Ui as AbstractUi;
 
 /**
- * Class Ui
+ * UI handler for Tag fixture.
  */
 class Ui extends AbstractUi implements TagInterface
 {
-   public function persist(FixtureInterface $fixture = null)
+    /**
+     * Persist Tag fixture.
+     *
+     * @param FixtureInterface $fixture [optional]
+     * @return mixed
+     */
+    public function persist(FixtureInterface $fixture = null)
     {
         //
     }

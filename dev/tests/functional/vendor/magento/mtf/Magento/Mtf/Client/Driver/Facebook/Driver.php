@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2016 Magento. All rights reserved.
+ * Copyright © 2017 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -219,6 +219,26 @@ final class Driver implements DriverInterface
     public function rightClick(ElementInterface $element)
     {
         throw new \Exception('To use this action, extend the native driver!');
+    }
+
+    /**
+     * Check whether element is present in the DOM.
+     *
+     * @param ElementInterface $element
+     * @return bool
+     */
+    public function isPresent(ElementInterface $element)
+    {
+        $isPresent = true;
+        $nativeElement = null;
+        try {
+            $this->eventManager->dispatchEvent(['is_present'], [__METHOD__, $element->getAbsoluteSelector()]);
+            $nativeElement = $this->getNativeElement($element, false);
+        } catch (\PHPUnit_Extensions_Selenium2TestCase_WebDriverException $e) {
+            $isPresent = false;
+        }
+
+        return $nativeElement !== null && $isPresent;
     }
 
     /**
@@ -586,6 +606,16 @@ final class Driver implements DriverInterface
             $this->eventManager->dispatchEvent(['switch_to_frame'], ['Switch to main window']);
             $this->driver->switchTo()->frame();
         }
+    }
+
+    /**
+     * Open new tab/window in Browser.
+     *
+     * @return void
+     */
+    public function openWindow()
+    {
+        $this->driver->createNewSession();
     }
 
     /**

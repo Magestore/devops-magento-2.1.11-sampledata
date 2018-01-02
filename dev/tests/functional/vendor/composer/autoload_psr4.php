@@ -6,8 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
+    'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'Test\\' => array($baseDir . '/generated/Test'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
+    'Symfony\\Component\\Debug\\' => array($vendorDir . '/symfony/debug'),
+    'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Magento\\' => array($baseDir . '/lib/Magento', $baseDir . '/testsuites/Magento', $baseDir . '/generated/Magento', $baseDir . '/tests/app/Magento', $vendorDir . '/magento/mtf/Magento', $vendorDir . '/magento/mtf/testsuites/Magento', $vendorDir . '/magento/mtf/tests/app/Magento'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
+    'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
 );
